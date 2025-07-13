@@ -9,7 +9,6 @@ from camera import take_photo
 from database import SessionLocal, engine, Base
 from inference_utils import perform_inference
 from dotenv import load_dotenv, set_key
-from ble_handshake import start_ble_token_advertiser
 
 Base.metadata.create_all(bind=engine)
 
@@ -41,7 +40,6 @@ background_task = None
 
 @asynccontextmanager
 async def lifespan(fastapp: FastAPI):
-    start_ble_token_advertiser()
     global background_task
     async def run_inference_loop():
         while True:
